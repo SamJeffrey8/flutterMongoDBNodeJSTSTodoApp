@@ -24,6 +24,45 @@ router.get("/", async (req:Request,res: Response) => {
   } catch (error) {
     console.log(error);
   }
-})
+});
+
+
+router.delete("/delete", async (req:Request,res: Response) => {
+
+    const filter = {
+        title : req.body.title,
+        description : req.body.description,
+    }
+    const dataItem = await Todo.deleteOne(filter).then((data)=> res.json(
+        {data : data}
+    )).catch((error)=>{ 
+        return res.send(error);
+    });;
+  
+  
+  
+});
+
+router.put("/update", async (req:Request,res: Response) => {
+
+    const filter = {
+        title : req.body.title,
+    }
+    const update = {
+        description : req.body.description,
+    }
+
+
+    const dataItem = await Todo.updateOne(filter, update, {
+        new: true,
+    }).then((data)=> res.json(
+        {data : data}
+    )).catch((error)=>{ 
+        return res.send(error);
+    });;
+  
+  
+  
+});
 
 export {router};

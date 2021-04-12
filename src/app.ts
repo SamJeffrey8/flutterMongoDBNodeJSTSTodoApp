@@ -15,7 +15,7 @@ mongoose.connect(
         useNewUrlParser : true,
     },
     ()=>{
-        console.log("DB Connected")
+        console.log("MongoDB Connected")
     }
 );
 
@@ -24,5 +24,5 @@ app.use("/", router);
 
 
 app.listen(8080, ()=>{
-    console.log("Shit is rocking at lh 8080")
+    console.log("Server is running at Port 8080")
 });
