@@ -13,4 +13,17 @@ router.post("/add", async (req : Request  , res : Response) => {
     });
 });
 
+router.get("/", async (req:Request,res: Response) => {
+
+	try {
+    const dataItem = await Todo.find({});
+
+    res.status(200).json({
+      data: dataItem,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+})
+
 export {router};

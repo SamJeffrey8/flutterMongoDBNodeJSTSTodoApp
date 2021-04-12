@@ -21,8 +21,7 @@ const todoSchema  =  new mongoose.Schema({
     },
 });
 
-interface totoModelInterFace extends mongoose.Model<TodoDocument>{
-    
+interface totoModelInterFace extends mongoose.Model<TodoDocument>{    
     set(x : TodoI) : TodoDocument;
     
 }
@@ -30,7 +29,7 @@ interface totoModelInterFace extends mongoose.Model<TodoDocument>{
 
 
 todoSchema.statics.set = ( x  : TodoI) => {
-        return new Todo();
+        return new Todo(x);
     };
 
 const Todo = mongoose.model<TodoDocument, totoModelInterFace> (
