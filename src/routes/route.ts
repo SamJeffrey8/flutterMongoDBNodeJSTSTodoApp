@@ -31,7 +31,6 @@ router.delete("/delete", async (req:Request,res: Response) => {
 
     const filter = {
         id : req.body.id,
-        description : req.body.description,
     }
     const dataItem = await Todo.deleteOne(filter).then((data)=> res.json(
         {data : data}
