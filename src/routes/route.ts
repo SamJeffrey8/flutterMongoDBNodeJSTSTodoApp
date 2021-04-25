@@ -45,9 +45,10 @@ router.delete("/delete", async (req:Request,res: Response) => {
 router.put("/update", async (req:Request,res: Response) => {
 
     const filter = {
-        title : req.body.title,
+        id : req.body.id,
     }
     const update = {
+        title : req.body.title,
         description : req.body.description,
     }
 
