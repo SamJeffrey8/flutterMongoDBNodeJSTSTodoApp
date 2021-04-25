@@ -37,23 +37,29 @@ class _HomeViewState extends State<HomeView> {
                   snapshot.connectionState == ConnectionState.waiting
                       ? Center(child: CircularProgressIndicator())
                       : ListView.builder(
-                          itemBuilder: (context, index) => ListTile(
-                            onTap: () {
-                              updateDataWidget(
-                                context,
-                                model.todoData[index]['_id'],
-                              );
-                            },
-                            onLongPress: () {
-                              print(model.todoData[index]['_id']);
+                          itemBuilder: (context, index) => Dismissible(
+                            key: Key(model.todoData[index].toString()),
+                            onDismissed: (dir) {
                               model.deleteData(model.todoData[index]['_id']);
                             },
-                            title: model.todoData[index]['title'] != null
-                                ? Text(model.todoData[index]['title'])
-                                : Text("data"),
-                            subtitle: model.todoData[index]['title'] != null
-                                ? Text(model.todoData[index]['description'])
-                                : Text("data"),
+                            child: ListTile(
+                              onTap: () {
+                                updateDataWidget(
+                                  context,
+                                  model.todoData[index]['_id'],
+                                );
+                              },
+                              onLongPress: () {
+                                print(model.todoData[index]['_id']);
+                                model.deleteData(model.todoData[index]['_id']);
+                              },
+                              title: model.todoData[index]['title'] != null
+                                  ? Text(model.todoData[index]['title'])
+                                  : Text("data"),
+                              subtitle: model.todoData[index]['title'] != null
+                                  ? Text(model.todoData[index]['description'])
+                                  : Text("data"),
+                            ),
                           ),
                           itemCount: model.todoData.length,
                         ),
