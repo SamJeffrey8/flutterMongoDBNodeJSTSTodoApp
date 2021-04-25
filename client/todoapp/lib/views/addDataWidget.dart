@@ -30,7 +30,7 @@ addData(BuildContext context) {
                     Provider.of<TodoProvider>(context, listen: false).postData({
                       "title": textEditingController.text.toString(),
                       "description": descriptionController.text.toString()
-                    });
+                    }).whenComplete(() => Navigator.pop(context));
                   }
                 },
                 child: Text("Submit"),
@@ -67,6 +67,8 @@ updateDataWidget(BuildContext context, String id) {
                       "_id": id,
                       "title": textEditingController.text.toString(),
                       "description": descriptionController.text.toString()
+                    }).whenComplete(() {
+                      Navigator.pop(context);
                     });
                   }
                 },

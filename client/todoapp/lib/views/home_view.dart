@@ -33,26 +33,30 @@ class _HomeViewState extends State<HomeView> {
         body: Container(
           child: Consumer<TodoProvider>(
             builder: (context, model, _) => FutureBuilder(
-              builder: (context, snapshot) => ListView.builder(
-                itemBuilder: (context, index) => ListTile(
-                  onTap: () {
-                    model.deleteData(model.todoData[index]['_id']);
-                  },
-                  onLongPress: () {
-                    updateDataWidget(
-                      context,
-                      model.todoData[index]['_id'],
-                    );
-                  },
-                  title: model.todoData[index]['title'] != null
-                      ? Text(model.todoData[index]['title'])
-                      : Text("data"),
-                  subtitle: model.todoData[index]['title'] != null
-                      ? Text(model.todoData[index]['description'])
-                      : Text("data"),
-                ),
-                itemCount: model.todoData.length,
-              ),
+              builder: (context, snapshot) =>
+                  snapshot.connectionState == ConnectionState.waiting
+                      ? Center(child: CircularProgressIndicator())
+                      : ListView.builder(
+                          itemBuilder: (context, index) => ListTile(
+                            onTap: () {
+                              updateDataWidget(
+                                context,
+                                model.todoData[index]['_id'],
+                              );
+                            },
+                            onLongPress: () {
+                              print(model.todoData[index]['_id']);
+                              model.deleteData(model.todoData[index]['_id']);
+                            },
+                            title: model.todoData[index]['title'] != null
+                                ? Text(model.todoData[index]['title'])
+                                : Text("data"),
+                            subtitle: model.todoData[index]['title'] != null
+                                ? Text(model.todoData[index]['description'])
+                                : Text("data"),
+                          ),
+                          itemCount: model.todoData.length,
+                        ),
               future: model.fetchData(),
             ),
           ),

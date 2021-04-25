@@ -30,7 +30,7 @@ router.get("/", async (req:Request,res: Response) => {
 router.delete("/delete", async (req:Request,res: Response) => {
 
     const filter = {
-        id : req.body.id,
+        _id : req.body._id,
     }
     const dataItem = await Todo.deleteOne(filter).then((data)=> res.json(
         {data : data}
@@ -45,7 +45,7 @@ router.delete("/delete", async (req:Request,res: Response) => {
 router.put("/update", async (req:Request,res: Response) => {
 
     const filter = {
-        id : req.body.id,
+        _id : req.body._id,
     }
     const update = {
         title : req.body.title,
